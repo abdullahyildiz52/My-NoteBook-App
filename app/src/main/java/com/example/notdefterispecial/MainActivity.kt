@@ -2,7 +2,6 @@ package com.example.notdefterispecial
 
 import android.app.AlertDialog
 import android.database.Cursor
-import android.icu.text.DateFormat
 import android.os.Bundle
 import android.view.View
 import android.widget.ArrayAdapter
@@ -54,7 +53,7 @@ class MainActivity : AppCompatActivity() {
                 .setPositiveButton("Düzenle") { dialog, which ->
                     showEditNoteDialog(noteId, noteParts[0])
                 }
-                .setNegativeButton("Sİl") { dialog, which ->
+                .setNegativeButton("Sil") { dialog, which ->
                     dbHelper.deleteNote(noteId)
                     loadNotes()
                 }
@@ -98,9 +97,9 @@ class MainActivity : AppCompatActivity() {
             .setView(editText)
             .setPositiveButton("Ekle") { dialog, which ->
                 val newNote = editText.text.toString()
-                val date = System.currentTimeMillis().toString()
+                //val date = System.currentTimeMillis().toString()
                 // Geçici tarih, güncelleyebilirsin
-
+                val date = SimpleDateFormat("dd/MM/yyyy HH:mm:ss", Locale.getDefault()).format(Date())
 
                 dbHelper.addNote(newNote, date) // Veritabanına yeni not ekle
                 loadNotes() // Notları yenile
